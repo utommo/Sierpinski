@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>Sierpinski triangles</title>	
+	</head>
+
+	<h1>Sierpinski</h1>
+
+	<canvas id="mainCanvas" width="800" height="600" style="border:1px solid;"></canvas><br><br>
+	
+	<script type="text/javascript">
+
+		var c=document.getElementById("mainCanvas");
+		var ctx=c.getContext("2d");
+
+		var x = 300;
+		var y = 25;
+		var l = 500;
+		var n = 2;
+
+
+		function drawtri(x, y, l){
+
+			var toppoint = (Math.sqrt(3)/2)*l;
+			
+			ctx.beginPath();
+			//RIght
+			ctx.moveTo(x,y); ctx.lineTo((x - l/2),(y + toppoint));
+			//Left
+			ctx.lineTo(x,y); ctx.lineTo((x + l/2),(y + toppoint));
+			//Bottom
+			ctx.lineTo((x - l/2),(y + toppoint)); ctx.lineTo((x + l/2),(y + toppoint));
+		
+			ctx.stroke();
+		}
+
+		function sierpinski(n, x, y, l){
+			
+			//n = document.getElementById("nvar");
+			
+			if(n == 0){
+				drawtri(x, y, l);
+			}else{
+				toppoint = (Math.sqrt(3)/2)*l;
+
+				sierpinski(n-1, x, y, l/2);
+				sierpinski(n-1, (x - l/4), (y + toppoint/2), l/2);
+				sierpinski(n-1, (x + l/4), (y + toppoint/2), l/2);
+			}
+
+
+		}
+
+
+	</script>
+	<!---<input id="nvar" value="0" type="text"><br>
+	<button id="button" type="button" onclick="setn()">Set n</button>*/-->
+	<button id="button" type="button" onclick="sierpinski(n, x, y, l)">Draw</button>
+</html>
