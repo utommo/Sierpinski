@@ -15,32 +15,30 @@
 		var x = 300;
 		var y = 25;
 		var l = 500;
-		var n = 2;
-
+		var n = 6;
 
 		function drawtri(x, y, l){
 
 			var toppoint = (Math.sqrt(3)/2)*l;
 			
 			ctx.beginPath();
-			//RIght
-			ctx.moveTo(x,y); ctx.lineTo((x - l/2),(y + toppoint));
-			//Left
-			ctx.lineTo(x,y); ctx.lineTo((x + l/2),(y + toppoint));
-			//Bottom
-			ctx.lineTo((x - l/2),(y + toppoint)); ctx.lineTo((x + l/2),(y + toppoint));
-		
+			ctx.moveTo(x,y); 
+			ctx.lineTo((x - l/2),(y + toppoint));
+			ctx.lineTo((x + l/2),(y + toppoint));
+			ctx.lineTo(x,y);
+			ctx.closePath();
+			ctx.fillStyle = '#FFFF00'; 
+			ctx.fill();
 			ctx.stroke();
 		}
 
 		function sierpinski(n, x, y, l){
 			
-			//n = document.getElementById("nvar");
 			
 			if(n == 0){
 				drawtri(x, y, l);
 			}else{
-				toppoint = (Math.sqrt(3)/2)*l;
+				var toppoint = (Math.sqrt(3)/2)*l;
 
 				sierpinski(n-1, x, y, l/2);
 				sierpinski(n-1, (x - l/4), (y + toppoint/2), l/2);
@@ -52,7 +50,7 @@
 
 
 	</script>
-	<!---<input id="nvar" value="0" type="text"><br>
-	<button id="button" type="button" onclick="setn()">Set n</button>*/-->
+
+	<input id="nvar" value="0" type="text"><br>
 	<button id="button" type="button" onclick="sierpinski(n, x, y, l)">Draw</button>
 </html>
