@@ -12,10 +12,17 @@
 		var c=document.getElementById("mainCanvas");
 		var ctx=c.getContext("2d");
 
-		var x = 300;
-		var y = 25;
-		var l = 500;
-		var n = 6;
+		var x = 400;
+		var y = 0;
+		var l = 650;
+		var n;
+		
+		function grabn(ctx){
+
+			ctx.clearRect(0, 0, c.width, c.height)
+			return document.getElementById("nvar_input").value;
+
+		}
 
 		function drawtri(x, y, l){
 
@@ -34,7 +41,6 @@
 
 		function sierpinski(n, x, y, l){
 			
-			
 			if(n == 0){
 				drawtri(x, y, l);
 			}else{
@@ -51,6 +57,8 @@
 
 	</script>
 
-	<input id="nvar" value="0" type="text"><br>
-	<button id="button" type="button" onclick="sierpinski(n, x, y, l)">Draw</button>
+	<label>Please enter a value (def. 1)</label><br>
+	<input type="number" name="nvar_input" id="nvar_input">
+	<button id="button" type="button" onclick="sierpinski(grabn(ctx), x, y, l);">Draw</button>
+	<br><label>A number greater than 10 will take a long time to generate. (It may also crash the tab.)</label>
 </html>
